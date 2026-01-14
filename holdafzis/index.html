@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holdfázis</title>
+</head>
+<body>
+    <h1 id="cim"></h1>
+    <button onclick="start()">Start Holdállás</button>
+    <button onclick="stop()">Stop Holdállás</button>
+    <br>
+    <br>
+    <img src="" alt="" id="holdAllas">
+
+    <h1>Valuta váltó</h1>
+    <p>Választott pénznem:</p>
+    <p>Érték:</p>
+
+    
+
+    <script>
+        idozito = null;
+        stopGomb = clearInterval(idozito);
+        function start(){
+            idozito = setInterval(holdMutat,1000);
+        }
+        function stop(){
+            clearInterval(idozito);
+            document.getElementById("holdAllas").src = "";
+        }
+        let nap = 1;
+        let honap = 1;
+        function holdMutat(){
+            fetch("http://localhost/holdafzis/index.php?nap=2026-"+honap+"-"+nap).then(x =>x.json()).then(json=>{
+            console.log(json)
+                document.getElementById("holdAllas").src = json.kep;
+                nap++;
+                
+                if(nap>31){
+                    nap = 1;
+                    honap++;
+                }
+                if(honap>12){
+                    honap = 1;
+                }
+             })
+             
+        }
+
+        function valutaValto(){
+            fetch("https://api.coingecko.com/api/v3/exchange_rates").then(x =>x.json()).then(json=>{
+                console.log(json)
+            })
+        }
+        valutaValto();
+        
+    </script>
+</body>
+</html>
