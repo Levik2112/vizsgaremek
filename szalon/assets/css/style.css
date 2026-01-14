@@ -1,0 +1,695 @@
+
+:root {
+    --dark: #111;
+    --dark-soft: #1c1c1c;
+    --gold: #d4af37;
+    --bg: #f4f4f2;
+    --card: #ffffff;
+    --border: #e0e0e0;
+}
+/* ===============================
+   DARK MODE – BOOTSTRAP TEXT FIX
+   =============================== */
+
+body.dark-mode .text-muted {
+    color: #aaa !important;
+}
+
+/* ===== DARK MODE – VÁLTOZÓK ===== */
+body.dark-mode {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --dark: #f1f1f1;
+    --border: rgba(255,255,255,0.15);
+}
+/* ===============================
+   DARK MODE TOGGLE – POZÍCIÓ FIX
+   =============================== */
+
+.theme-toggle {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: #1f1f1f;
+    color: #d4af37;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10000;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    transition: all 0.25s ease;
+}
+/* ===============================
+   AUTH / REGISTER FORM – LAYOUT FIX
+   =============================== */
+
+.auth-container {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-card input,
+.auth-card select {
+    width: 100%;
+}
+/* ===============================
+   AUTH FORM – FINAL UI POLISH
+   =============================== */
+
+/* Input + select egységes dark stílus */
+body.dark-mode .auth-card input,
+body.dark-mode .auth-card select {
+    background: #1c1c1c;
+    color: #eee;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+body.dark-mode .auth-card input::placeholder {
+    color: #aaa;
+}
+
+/* Select nyíl és fókusz */
+body.dark-mode .auth-card select {
+    appearance: none;
+    cursor: pointer;
+}
+
+body.dark-mode .auth-card input:focus,
+body.dark-mode .auth-card select:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+/* Fő gomb hangsúlyosabb */
+body.dark-mode .auth-card .btn-main {
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #111;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .auth-card .btn-main:hover {
+    background: linear-gradient(135deg, #e6c95c, #d4af37);
+    transform: translateY(-2px);
+}
+
+/* Link finomítás */
+body.dark-mode .auth-link a {
+    color: #d4af37;
+    font-weight: 500;
+}
+
+body.dark-mode .auth-link a:hover {
+    color: #f1c84b;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.08);
+    background: #d4af37;
+    color: #111;
+}
+
+body.dark-mode .theme-toggle {
+    background: #d4af37;
+    color: #111;
+}
+
+
+body {
+    background: #f4f4f4;
+    font-family: system-ui, sans-serif;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+/* ===== LAYOUT ===== */
+.page-wrapper {
+    min-height: calc(100vh - 160px);
+    padding: 60px 0;
+    background: var(--bg);
+}
+
+.page-wrapper .container {
+    margin-top: 120px;
+}
+
+.card-custom {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.25s;
+}
+
+.card-custom:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+}
+
+/* ===== NAVBAR ===== */
+.navbar-custom {
+    background: linear-gradient(180deg, #111, #1a1a1a);
+    padding: 1.2rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.navbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.nav-btn {
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.login-btn {
+    color: var(--gold);
+    border: 1px solid var(--gold);
+}
+
+.login-btn:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+.logout-btn {
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.logout-btn:hover {
+    background: #fff;
+    color: #111;
+}
+
+/* ===== HERO ===== */
+.hero {
+    height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* ===== HERO GOMBOK ===== */
+.btn-primary-custom {
+    background: #1f1f1f;
+    color: #fff;
+    padding: 0.75rem 2.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+.btn-outline-custom {
+    background: transparent;
+    color: #1f1f1f;
+    border: 2px solid #1f1f1f;
+    padding: 0.75rem 2.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-outline-custom:hover {
+    background: #1f1f1f;
+    color: #fff;
+}
+
+/* ===== OLDAL / WORKER GOMBOK ===== */
+.btn-main {
+    background: var(--dark);
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 26px;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-main:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+.btn-outline-main {
+    background: transparent;
+    color: var(--dark);
+    border: 1px solid var(--dark);
+    border-radius: 30px;
+    padding: 10px 26px;
+    transition: 0.3s;
+}
+
+.btn-outline-main:hover {
+    background: var(--dark);
+    color: #fff;
+}
+
+/* ===== TABLE ===== */
+.table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th {
+    background: var(--dark);
+    color: white;
+}
+
+.table td,
+.table th {
+    padding: 14px;
+}
+
+/* ======================================================
+   DARK MODE
+   ====================================================== */
+body.dark-mode {
+    background: #0f0f0f;
+    color: #eee;
+}
+
+body.dark-mode .card-custom {
+    background: #1a1a1a;
+    border-color: rgba(255,255,255,0.15);
+}
+
+body.dark-mode .navbar-custom {
+    background: linear-gradient(180deg, #000, #111);
+}
+
+/* ===== DARK MODE – HERO GOMBOK (FOGLALÁSAIM FIX) ===== */
+body.dark-mode .hero-buttons .btn-primary-custom {
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #111;
+}
+
+body.dark-mode .hero-buttons .btn-outline-custom {
+    background: transparent;
+    color: #d4af37;
+    border-color: #d4af37;
+}
+
+body.dark-mode .hero-buttons .btn-outline-custom:hover {
+    background: #d4af37;
+    color: #111;
+}
+
+/* ===== DARK MODE – OLDAL / WORKER GOMBOK ===== */
+body.dark-mode .page-wrapper .btn-main {
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #111;
+}
+
+body.dark-mode .page-wrapper .btn-outline-main {
+    background: transparent;
+    color: #d4af37;
+    border-color: #d4af37;
+}
+
+body.dark-mode .page-wrapper .btn-outline-main:hover {
+    background: #d4af37;
+    color: #111;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #1f1f1f;
+    color: #aaa;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+/* ===============================
+   DARK MODE – SZÖVEG KONTRASZT FIX
+   =============================== */
+
+body.dark-mode p {
+    color: #ccc;
+}
+
+body.dark-mode .hero-content p {
+    color: #bbb;
+}
+
+body.dark-mode .feature-box p {
+    color: #aaa;
+}
+
+/* ===============================
+   REGISTER FORM – FIX (NO BOOTSTRAP)
+   =============================== */
+
+.auth-container {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LIGHT MODE – REGISTER CARD */
+.auth-container .card-custom {
+    max-width: 420px;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+/* DARK MODE – REGISTER CARD */
+body.dark-mode .auth-container .card-custom {
+    background: linear-gradient(180deg, #1a1a1a, #151515);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Form layout */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Input + select */
+body.dark-mode .auth-container input,
+body.dark-mode .auth-container select {
+    width: 100%;
+    background: #1c1c1c;
+    color: #eee;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+}
+
+body.dark-mode .auth-container input::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .auth-container input:focus,
+body.dark-mode .auth-container select:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+/* Register gomb */
+.auth-container .btn-primary-custom {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+}
+
+/* Link */
+.auth-link {
+    margin-top: 14px;
+    text-align: center;
+}
+
+.auth-link a {
+    color: var(--gold);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===============================
+   AUTH INPUTS – CLEAN & MODERN
+   =============================== */
+
+/* KÖZÖS (light + dark) */
+.auth-container .form-group {
+    width: 100%;
+}
+
+.auth-container input,
+.auth-container select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    outline: none;
+}
+
+/* ===== LIGHT MODE INPUT ===== */
+.auth-container input,
+.auth-container select {
+    background: #f9f9f9;
+    color: #111;
+    border: 1px solid #ccc;
+}
+
+.auth-container input::placeholder {
+    color: #777;
+}
+
+.auth-container input:focus,
+.auth-container select:focus {
+    border-color: var(--gold);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.25);
+}
+
+/* ===== DARK MODE INPUT ===== */
+body.dark-mode .auth-container input,
+body.dark-mode .auth-container select {
+    background: #1c1c1c;
+    color: #eee;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+body.dark-mode .auth-container input::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .auth-container input:focus,
+body.dark-mode .auth-container select:focus {
+    border-color: var(--gold);
+    background: #1f1f1f;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.35);
+}
+
+/* ===============================
+   DARK MODE – CLIENT DASHBOARD
+   Foglalásaim gomb FIX
+   =============================== */
+
+body.dark-mode .btn-outline-custom {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+}
+
+body.dark-mode .btn-outline-custom:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+/* ===============================
+   STICKY FOOTER – GLOBAL FIX
+   =============================== */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Az oldal fő tartalma */
+.page-wrapper,
+.container,
+.auth-container {
+    flex: 1 0 auto;
+}
+
+/* Footer mindig lent */
+.footer {
+    margin-top: auto;
+}
+
+/* ======================================================
+   LOGIN PAGE – BOOTSTRAP INPUT DESIGN FIX
+   (HTML változtatás nélkül)
+   ====================================================== */
+
+/* Login kártyán belüli inputok */
+.card-custom .form-control {
+    width: 100%;
+    height: 48px;
+
+    padding: 12px 16px;
+    font-size: 0.95rem;
+
+    border-radius: 12px;
+    border: 1px solid #cfcfcf;
+
+    background: #f9f9f9;
+    color: #111;
+
+    box-shadow: none;
+    transition: all 0.25s ease;
+}
+
+/* Placeholder */
+.card-custom .form-control::placeholder {
+    color: #777;
+}
+
+/* Focus – LIGHT MODE */
+.card-custom .form-control:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.25);
+}
+
+/* ===============================
+   DARK MODE
+   =============================== */
+
+body.dark-mode .card-custom .form-control {
+    background: #1c1c1c;
+    color: #eee;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+body.dark-mode .card-custom .form-control::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .card-custom .form-control:focus {
+    border-color: var(--gold);
+    background: #1f1f1f;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.35);
+}
+/* ===============================
+   LOGIN – PASSWORD EYE ICON
+   =============================== */
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 48px; /* hely a szemnek */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 1.1rem;
+    cursor: pointer;
+    user-select: none;
+
+    opacity: 0.6;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+/* DARK MODE */
+body.dark-mode .toggle-password {
+    color: #ccc;
+}
+
+/* REGISTER – PASSWORD SPACING FIX */
+.password-wrapper {
+    margin-bottom: 0;
+}
+
+.password-wrapper + .form-group {
+    margin-top: -23px; /* kontrollált, szép távolság */
+}
+ /* FULLCALENDAR – CLIENT */
+#calendar {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* DARK MODE */
+body.dark-mode #calendar {
+    background: #1a1a1a;
+}
