@@ -27,30 +27,30 @@ body.dark-mode {
    =============================== */
 
 .theme-toggle {
-    position: fixed;
-    top: 18px;
-    right: 24px;
-
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
 
     border-radius: 50%;
-    border: none;
+    border: 1px solid var(--gold);
 
-    background: #1f1f1f;
-    color: #d4af37;
+    background: transparent;
+    color: var(--gold);
 
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    z-index: 10000;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
     transition: all 0.25s ease;
 }
+
+.theme-toggle:hover {
+    background: var(--gold);
+    color: #111;
+}
+
 /* ===============================
    AUTH / REGISTER FORM – LAYOUT FIX
    =============================== */
@@ -819,4 +819,115 @@ body.dark-mode .modal-box select {
     gap: 12px;
     justify-content: center;
     margin-top: 16px;
+}
+/* PROFIL – JELSZÓ MÓDOSÍTÁS GOMB FIX */
+.profile-password-btn,
+.profile-password-btn.btn-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 50px;
+    text-decoration: none;
+    padding: 14px 22px;
+    font-size: 0.95rem;
+    line-height: 1;
+}
+/* ===== NAVBAR LAYOUT FIX ===== */
+
+.navbar-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+/* BAL */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: flex-start;
+}
+
+/* KÖZÉP */
+.nav-center {
+    display: flex;
+    justify-content: center;
+}
+
+/* JOBB */
+.nav-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Profil ikon */
+.nav-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 1.1rem;
+
+    transition: all 0.25s ease;
+}
+
+.nav-profile:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+/* ===== TOAST ===== */
+#toastContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 260px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+}
+
+.toast.success {
+    background: #198754;
+}
+
+.toast.error {
+    background: #dc3545;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
 }

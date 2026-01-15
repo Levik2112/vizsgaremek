@@ -22,27 +22,37 @@ if (isset($_SESSION['role'])) {
     if ($_SESSION['role'] === 'admin')  $home = "/szalon/admin/dashboard.php";
 }
 ?>
-<button id="themeToggle" class="theme-toggle" aria-label="Dark mode váltás">
-    🌙
-</button>
-
 
 <nav class="navbar-custom">
     <div class="navbar-inner">
 
-        <div class="nav-side"></div>
+        <!-- BAL OLDAL: ikonok -->
+        <div class="nav-left">
+            <button id="themeToggle" class="theme-toggle" aria-label="Dark mode váltás">
+                🌙
+            </button>
 
-       <a href="<?= $home ?>" class="navbar-logo">
-    <span class="logo-icon">✦</span>
-    <span class="logo-text">Szalon</span>
-</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="/szalon/profile/index.php" class="nav-profile" title="Profil">
+                    👤
+                </a>
+            <?php endif; ?>
+        </div>
 
-        <div class="nav-side nav-right">
+        <!-- KÖZÉP: LOGÓ -->
+        <div class="nav-center">
+            <a href="<?= $home ?>" class="navbar-logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">Szalon</span>
+            </a>
+        </div>
+
+        <!-- JOBB OLDAL: kijelentkezés -->
+        <div class="nav-right">
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="/szalon/logout.php" class="nav-btn logout-btn">
                     Kijelentkezés
                 </a>
-            
             <?php endif; ?>
         </div>
 

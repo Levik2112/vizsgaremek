@@ -44,6 +44,11 @@ CREATE TABLE appointments (
     FOREIGN KEY (service_id) REFERENCES services(id)
 );
 
+ALTER TABLE users
+ADD phone VARCHAR(30),
+ADD email_change_code VARCHAR(10),
+ADD password_change_code VARCHAR(10),
+ADD code_expires DATETIME;
 
 INSERT INTO users (name, email, password, role)
 VALUES (
