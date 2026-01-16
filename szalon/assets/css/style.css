@@ -885,49 +885,282 @@ body.dark-mode .modal-box select {
     color: #111;
 }
 
-/* ===== TOAST ===== */
-#toastContainer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 99999;
+/* ===== STATUS MESSAGE ===== */
+.status-message {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.status-success {
+    background: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+}
+
+.status-error {
+    background: #fdecea;
+    color: #b71c1c;
+    border: 1px solid #f5c6cb;
+}
+.appointment-row {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 16px;
+    margin-bottom: 12px;
+
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+}
+
+.appointment-actions {
+    display: flex;
     gap: 10px;
 }
 
-.toast {
-    min-width: 260px;
-    padding: 14px 18px;
-    border-radius: 12px;
+.btn-edit,
+.btn-cancel {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Módosítás */
+.btn-edit {
+    background: #0d6efd;
     color: #fff;
-    font-size: 0.9rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    text-decoration: none;
 }
 
-.toast.success {
-    background: #198754;
+.btn-edit:hover {
+    background: #0b5ed7;
 }
 
-.toast.error {
+/* Lemondás */
+.btn-cancel {
+    background: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.btn-cancel:hover {
     background: #dc3545;
+    color: #fff;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+/* Dark mode */
+body.dark-mode .appointment-row {
+    background: #1a1a1a;
+    border-color: rgba(255,255,255,0.15);
 }
 
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-        transform: translateX(30px);
-    }
+body.dark-mode .appointment-info {
+    color: #eee;
+}
+
+/* ===============================
+   FOGLALÁSAIM – LISTA & GOMBOK
+   =============================== */
+
+.appointment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.appointment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+body.dark-mode .appointment-item {
+    background: #1a1a1a;
+    border-color: rgba(255,255,255,0.15);
+}
+
+.appointment-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.service-name {
+    color: #666;
+}
+
+body.dark-mode .service-name {
+    color: #aaa;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status-booked {
+    background: #d4af37;
+    color: #111;
+}
+
+.status-cancelled {
+    background: #ccc;
+    color: #333;
+}
+
+.appointment-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* GOMBOK */
+.btn-action {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-edit {
+    background: #1f1f1f;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: #000;
+}
+
+.btn-delete {
+    background: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.btn-delete:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* ÜZENETEK */
+.status-message {
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.status-success {
+    background: #e6f6ec;
+    color: #146c43;
+}
+.appointment-list { list-style: none; padding: 0; }
+.appointment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* ===============================
+   MODAL – IDŐPONT MÓDOSÍTÁS
+   =============================== */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 360px;
+    position: relative;
+}
+
+.modal-box h5 {
+    margin-bottom: 16px;
+}
+
+.modal-box input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+body.dark-mode .modal-box {
+    background: #1a1a1a;
+}
+
+.service-card {
+    background: var(--card);
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    cursor: grab;
+    border: 1px solid var(--border);
+    transition: 0.2s;
+}
+
+.service-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+/* ===============================
+   WORKER – ELÉRHETŐSÉG
+   =============================== */
+
+.availability-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.availability-row strong {
+    width: 90px;
+}
+
+.availability-row input[type="time"] {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
 }

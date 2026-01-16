@@ -1,6 +1,8 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+
+    require_once __DIR__ . '/../config/db.php';
 }
 ?>
 <!DOCTYPE html>
@@ -21,6 +23,14 @@ if (isset($_SESSION['role'])) {
     if ($_SESSION['role'] === 'worker') $home = "/szalon/worker/dashboard.php";
     if ($_SESSION['role'] === 'admin')  $home = "/szalon/admin/dashboard.php";
 }
+
+$pdo->query("
+    UPDATE appointments
+    SET status = 'done'
+    WHERE status = 'booked'
+      AND appointment_time < NOW()
+");
+
 ?>
 
 <nav class="navbar-custom">

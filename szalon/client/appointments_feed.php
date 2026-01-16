@@ -16,6 +16,8 @@ $stmt = $pdo->prepare("
         status
     FROM appointments
     WHERE client_id = ?
+    AND status = 'booked'
+
 ");
 $stmt->execute([$clientId]);
 

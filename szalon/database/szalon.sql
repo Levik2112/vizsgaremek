@@ -31,6 +31,15 @@ CREATE TABLE services (
     duration INT
 );
 
+CREATE TABLE worker_availability (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    worker_id INT NOT NULL,
+    day_of_week TINYINT NOT NULL, -- 1=hétfő ... 7=vasárnap
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    UNIQUE KEY uniq_day (worker_id, day_of_week)
+);
+
 
 CREATE TABLE appointments (
     id INT AUTO_INCREMENT PRIMARY KEY,

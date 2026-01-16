@@ -7,7 +7,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'client') {
     exit;
 }
 
-/* === TÖRLÉS (CANCEL) === */
+/* === TÖRLÉS === */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
     $stmt = $pdo->prepare("
         UPDATE appointments 
@@ -16,18 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
     ");
     $stmt->execute([$_POST['cancel_id'], $_SESSION['user_id']]);
 
-    header("Location: my_appointments.php");
+    header("Location: my_appointments.php?success=Sikeres lemondás");
     exit;
 }
 
-/* FOGLALÁSOK */
 $stmt = $pdo->prepare("
     SELECT a.id, a.appointment_time, a.status, s.name AS service
     FROM appointments a
     JOIN services s ON s.id = a.service_id
     WHERE a.client_id = ?
+      AND a.status = 'booked'
     ORDER BY a.appointment_time DESC
 ");
+
 $stmt->execute([$_SESSION['user_id']]);
 $appointments = $stmt->fetchAll();
 ?>
@@ -38,38 +39,91 @@ $appointments = $stmt->fetchAll();
 
 <h3 class="mb-4">Foglalásaim</h3>
 
+<?php if (isset($_GET['success'])): ?>
+    <div class="status-message status-success">
+        <?= htmlspecialchars($_GET['success']) ?>
+    </div>
+<?php endif; ?>
+
 <?php if (empty($appointments)): ?>
     <p class="text-muted">Még nincs foglalásod.</p>
 <?php else: ?>
 
-<ul class="list-group">
+<ul class="appointment-list">
 <?php foreach ($appointments as $a): ?>
-<li class="list-group-item d-flex justify-content-between align-items-center">
+<li class="appointment-item">
 
-    <div>
-        <strong><?= $a['appointment_time'] ?></strong> – <?= $a['service'] ?>
-        <span class="badge badge-<?= $a['status'] ?> ms-2">
+    <div class="appointment-info">
+        <strong><?= date('Y-m-d H:i', strtotime($a['appointment_time'])) ?></strong>
+        <span><?= htmlspecialchars($a['service']) ?></span>
+        <span class="status-badge status-<?= $a['status'] ?>">
             <?= $a['status'] ?>
         </span>
     </div>
 
-    <?php if ($a['status'] === 'booked'): ?>
-        <form method="post">
-            <input type="hidden" name="cancel_id" value="<?= $a['id'] ?>">
-            <button class="btn btn-outline-danger btn-sm">
-                Törlés
-            </button>
-        </form>
-    <?php endif; ?>
+    <div class="appointment-actions">
+        <?php if ($a['status'] === 'booked'): ?>
+
+            <button
+    class="btn-action btn-edit"
+    onclick="openEditModal(<?= $a['id'] ?>, '<?= $a['appointment_time'] ?>')">
+    Módosítás
+</button>
+
+
+            <form method="post" onsubmit="return confirm('Biztosan lemondod?')">
+                <input type="hidden" name="cancel_id" value="<?= $a['id'] ?>">
+                <button class="btn-action btn-delete">
+                    Lemondás
+                </button>
+            </form>
+
+        <?php else: ?>
+            <span class="text-muted">Lezárt</span>
+        <?php endif; ?>
+    </div>
 
 </li>
 <?php endforeach; ?>
 </ul>
 
+
 <?php endif; ?>
 
 </div>
 </div>
+</div>
+<script>
+function openEditModal(id, time) {
+    document.getElementById('editId').value = id;
+
+    // datetime-local formátum
+    const formatted = time.replace(' ', 'T').slice(0,16);
+    document.getElementById('editTime').value = formatted;
+
+    document.getElementById('editModal').classList.add('active');
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').classList.remove('active');
+}
+</script>
+
+<div id="editModal" class="modal-overlay">
+    <div class="modal-box">
+        <h5>Időpont módosítása</h5>
+
+        <form method="post" action="update_appointment.php">
+            <input type="hidden" name="appointment_id" id="editId">
+
+            <label>Új időpont</label>
+            <input type="datetime-local" name="new_time" id="editTime" required>
+
+            <button class="btn-main w-100 mt-3">Mentés</button>
+        </form>
+
+        <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
 </div>
 
 <?php include '../views/footer.php'; ?>

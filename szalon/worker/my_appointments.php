@@ -53,7 +53,9 @@ $stmt = $pdo->prepare("
     FROM appointments a
     JOIN services s ON s.id = a.service_id
     WHERE a.worker_id = ?
-    ORDER BY a.appointment_time
+  AND a.status = 'booked'
+ORDER BY a.appointment_time DESC
+
 ");
 $stmt->execute([$workerId]);
 $appointments = $stmt->fetchAll();
